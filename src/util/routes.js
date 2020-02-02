@@ -9,6 +9,7 @@ const app = express()
 
 const SELECT_ALL_POSTS_QUERY = 'SELECT * FROM test_table';
 
+
 //CREATE AND CONFIGURE CONNECTION TO DB \\
 const connection = mysql.createConnection({
 	host	: 'localhost',
@@ -29,10 +30,24 @@ app.use(cors());
 // MAKE REQUEST TO URL'S INDEX-PAGE AND POST TEXT TO WEBPAGE \\
 app.get('/', (req, res) => {
 	res.send('hello from the products server');
-})
+});
+
+app.get('/posts/add', (req, res) => {
+	const { title, author } = req.query;
+	const INSERT_POST_QUERY = `INSERT INTO test_table (title, author) VALUES('${title}', '${author}')`
+	console.log(title, author);
+
+	connection.query(INSERT_POST_QUERY, (err, results) => {
+		if(err) {
+			return (err);
+		} else {
+			return res.send('successfully added post');
+		}
+	});
+});
 
 app.get('/posts', (req, res) => {
-	connection.query('SELECT * FROM test_table', (err, results) => {
+	connection.query(SELECT_ALL_POSTS_QUERY, (err, results) => {
 		if(err) {
 			return res.send('its the query');
 		} else {

@@ -8,6 +8,9 @@ import Nav from '../Nav/Nav';
 import PostList from './../PostList/PostList.js';
 import CreatePost from './../CreatePost/CreatePost.js';
 
+
+
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -19,12 +22,19 @@ class App extends React.Component {
 	this.getAllPosts = this.getAllPosts.bind(this);
 	}
 
+// COMPONENT WRAPPER TO PASS PROPS TO COMPONENTS RENDERED BY ROUTE- not working \\
+
+	// const postListWrapper = React.createClass({render: function () {
+	//		return (<PostList allposts = {allPosts} />);
+	//	}
+	// });
+
 	componentDidMount() {
 		this.getAllPosts();
 	}
 
-	// RETREIVES TEST_TABLE-DATA BY ACCESSING THE /POST SUBDIRECTORY OF THE URL \\
-	// NEED TO SPEND MORE TIME UNDERSTANDING THIS BLOCK \\
+// RETREIVES TEST_TABLE-DATA BY ACCESSING THE /POST SUBDIRECTORY OF THE URL \\
+// NEED TO SPEND MORE TIME UNDERSTANDING THIS BLOCK \\
 	getAllPosts = _ => {
 		fetch('http://localhost:8000/posts')
 			.then(response => response.json())
@@ -32,7 +42,7 @@ class App extends React.Component {
 			.catch(err => console.error(err))
 	}
 
-	renderPost = ({ id, title, author }) => <div key={id}>{title}	{author}</div>
+	renderPost = ({ id, title, author }) => <div key={id}>{title} | by: {author}</div>
 
 
 	render() {

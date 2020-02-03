@@ -8,19 +8,49 @@ import Nav from '../Nav/Nav';
 import PostList from './../PostList/PostList.js';
 import CreatePost from './../CreatePost/CreatePost.js';
 
-function App() {
-	return (
-		<Router>
-			<div className="App">
-			<Nav />
-				<Switch>
-					<Route path='/' exact component={Home} />
-					<Route path='/create-post' component={CreatePost} />
-					<Route path='/post-list' component={PostList} />
-				</Switch>
-			</div>
-		</Router>
-	);
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			allPosts: []
+		}
+
+	this.getAllPosts = this.getAllPosts.bind(this);
+	}
+
+	componentDidMount() {
+		this.getAllPosts();
+	}
+
+	// RETREIVES TEST_TABLE-DATA BY ACCESSING THE /POST SUBDIRECTORY OF THE URL \\
+	// NEED TO SPEND MORE TIME UNDERSTANDING THIS BLOCK \\
+	getAllPosts = _ => {
+		fetch('http://localhost:8000/posts')
+			.then(response => response.json())
+			.then(response => this.setState({ allPosts: response.data }))
+			.catch(err => console.error(err))
+	}
+
+	renderPost = ({ id, title, author }) => <div key={id}>{title}	{author}</div>
+
+
+	render() {
+		const { allPosts } = this.state;
+		return (
+			<Router>
+				<div className="App">
+				<Nav />
+					<Switch>
+						<Route path='/' exact component={Home} />
+						<Route path='/create-post' component={CreatePost} />
+						<Route path='/post-list' component={PostList} />
+					</Switch>
+				<div>
+				</div>{allPosts.map(this.renderPost)}</div>
+			</Router>
+		);
+	}
 }
 
 const Home = () => {

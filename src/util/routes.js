@@ -33,10 +33,16 @@ app.get('/', (req, res) => {
 });
 
 app.get('/posts/add', (req, res) => {
-	const { title, author } = req.query;
-	const INSERT_POST_QUERY = `INSERT INTO test_table (title, author) VALUES('${title}', '${author}')`
-	console.log(title, author);
 
+	// Initializes title and author, queries URL for title and author and assigns them to the variables \\
+	const { title, author } = req.query;
+
+
+	// Creates a variable with the SQL INSERT query assigned to its value \\
+	const INSERT_POST_QUERY = `INSERT INTO test_table (title, author) VALUES('${title}', '${author}')`
+
+
+	// Queries 'test-db' via the connection and returns err if unsuccessful \\
 	connection.query(INSERT_POST_QUERY, (err, results) => {
 		if(err) {
 			return (err);
@@ -45,6 +51,7 @@ app.get('/posts/add', (req, res) => {
 		}
 	});
 });
+
 
 app.get('/posts', (req, res) => {
 	connection.query(SELECT_ALL_POSTS_QUERY, (err, results) => {

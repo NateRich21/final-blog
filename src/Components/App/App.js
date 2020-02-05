@@ -15,7 +15,7 @@ class App extends React.Component {
 
 		this.state = {
 			allPosts: []
-		}
+		};
 
 	this.getAllPosts = this.getAllPosts.bind(this);
 	}
@@ -35,7 +35,9 @@ class App extends React.Component {
 			.then(response => this.setState({ allPosts: response.data }))
 			.catch(err => console.error(err))
 	}
-//----------------------------------------------------------------------------------
+
+
+
 
 	render() {
 		const { allPosts } = this.state;
@@ -45,7 +47,12 @@ class App extends React.Component {
 				<Nav />
 					<Switch>
 						<Route path='/' exact component={Home} />
-						<Route path='/create-post' component={CreatePost} />
+						<Route
+							path='/create-post'
+							render={
+								(props) => <CreatePost {...props}		   refresh={this.getAllPosts}/>
+							}
+						/>
 						<Route
 							path='/post-list'
 							render={(props) => <PostList {...props} allPosts={allPosts}/>}

@@ -16,8 +16,9 @@ class PostList extends React.Component {
 				<div className="PostListInfo">
 
 					{this.props.allPosts.map(post => {
-						return <PostListItem post={post} key={post.id} />
+						return <PostListItem post={post} key={  post.id} />
 					})}
+
 				</div>
 			</div>
 		);

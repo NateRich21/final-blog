@@ -9,8 +9,6 @@ import PostList from './../PostList/PostList.js';
 import CreatePost from './../CreatePost/CreatePost.js';
 
 
-
-
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -21,17 +19,13 @@ class App extends React.Component {
 
 	this.getAllPosts = this.getAllPosts.bind(this);
 	}
-
-// COMPONENT WRAPPER TO PASS PROPS TO COMPONENTS RENDERED BY ROUTE- not working \\
-
-	// const postListWrapper = React.createClass({render: function () {
-	//		return (<PostList allposts = {allPosts} />);
-	//	}
-	// });
+//-------------------------------------------------------------------------------
 
 	componentDidMount() {
 		this.getAllPosts();
 	}
+//-------------------------------------------------------------------------------
+
 
 // RETREIVES TEST_TABLE-DATA BY ACCESSING THE /POST SUBDIRECTORY OF THE URL \\
 // NEED TO SPEND MORE TIME UNDERSTANDING THIS BLOCK \\
@@ -41,9 +35,7 @@ class App extends React.Component {
 			.then(response => this.setState({ allPosts: response.data }))
 			.catch(err => console.error(err))
 	}
-
-	renderPost = ({ id, title, author }) => <div key={id}>{title} | by: {author}</div>
-
+//----------------------------------------------------------------------------------
 
 	render() {
 		const { allPosts } = this.state;
@@ -54,10 +46,12 @@ class App extends React.Component {
 					<Switch>
 						<Route path='/' exact component={Home} />
 						<Route path='/create-post' component={CreatePost} />
-						<Route path='/post-list' component={PostList} />
+						<Route
+							path='/post-list'
+							render={(props) => <PostList {...props} allPosts={allPosts}/>}
+						/>
 					</Switch>
-				<div>
-				</div>{allPosts.map(this.renderPost)}</div>
+				</div>
 			</Router>
 		);
 	}

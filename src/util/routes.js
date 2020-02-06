@@ -32,6 +32,23 @@ app.get('/', (req, res) => {
 	res.send('hello from the products server');
 });
 
+
+app.get('/posts/view-post', (req, res) => {
+	const { id } = req.query;
+	const SELECT_SINGLE_POST = `SELECT * FROM test_table WHERE id=${id}`
+
+	connection.query(SELECT_SINGLE_POST, (err, results) => {
+		if (err) {
+			return (err);
+		} else {
+			return res.json({
+				data: results
+			})
+		}
+	});
+});
+
+
 app.get('/posts/add', (req, res) => {
 
 	// Initializes title, author and content, queries URL for title, author, and content then assigns them to the variables \\

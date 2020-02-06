@@ -14,11 +14,11 @@ class PostList extends React.Component {
 			<div className='PostListPage'>
 				<h1>View Posts Here</h1>
 				<div className="PostListInfo">
-
-					{this.props.allPosts.map(post => {
-						return <PostListItem post={post} key={  post.id} />
-					})}
-
+					<ul>
+						{this.props.allPosts.map(post => {
+							return <li key={post.id}><PostListItem post={post} /></li>
+							})}
+					</ul>
 				</div>
 			</div>
 		);

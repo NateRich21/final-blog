@@ -7,6 +7,7 @@ import './App.css';
 import Nav from '../Nav/Nav';
 import PostList from './../PostList/PostList.js';
 import CreatePost from './../CreatePost/CreatePost.js';
+import ViewPost from './../ViewPost/ViewPost.js'
 
 
 class App extends React.Component {
@@ -14,7 +15,8 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			allPosts: []
+			allPosts: [],
+			id: null
 		};
 
 	this.getAllPosts = this.getAllPosts.bind(this);
@@ -46,7 +48,16 @@ class App extends React.Component {
 				<div className="App">
 				<Nav />
 					<Switch>
-						<Route path='/' exact component={Home} />
+						<Route
+							path='/'
+							exact
+							component={Home}
+						/>
+						<Route
+							path='/view-post'
+							exact
+							component={ViewPost}
+						/>
 						<Route
 							path='/create-post'
 							render={

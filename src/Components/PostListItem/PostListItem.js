@@ -1,6 +1,7 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
-import './PostListItem'
+import './PostListItem.css'
 
 
 class PostListItem extends React.Component {
@@ -14,7 +15,9 @@ class PostListItem extends React.Component {
 		return(
 			<div className='PostListItem'>
 				<div className='PostListItem-info'>
-					<h3>{this.props.post.title}</h3>
+					<Link to={`/view-post?id=${this.props.id}`}>
+						<li>{this.props.post.title}</li>
+					</Link>
 					<p>
 						{this.props.post.author} |
 						{this.props.post.id}

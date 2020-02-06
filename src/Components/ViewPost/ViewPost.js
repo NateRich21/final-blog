@@ -1,5 +1,5 @@
 import React from 'react';
-import '../SinglePost/SinglePost.css';
+import '../ViewPost/ViewPost.css';
 
 function SinglePost() {
 	return (

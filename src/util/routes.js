@@ -34,12 +34,12 @@ app.get('/', (req, res) => {
 
 app.get('/posts/add', (req, res) => {
 
-	// Initializes title and author, queries URL for title and author and assigns them to the variables \\
-	const { title, author } = req.query;
+	// Initializes title, author and content, queries URL for title, author, and content then assigns them to the variables \\
+	const { title, author, content } = req.query;
 
 
 	// Creates a variable with the SQL INSERT query assigned to its value \\
-	const INSERT_POST_QUERY = `INSERT INTO test_table (title, author) VALUES('${title}', '${author}')`
+	const INSERT_POST_QUERY = `INSERT INTO test_table (title, author, content) VALUES('${title}', '${author}', '${content}')`
 
 
 	// Queries 'test-db' via the connection and returns err if unsuccessful \\

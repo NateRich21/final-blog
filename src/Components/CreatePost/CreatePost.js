@@ -7,7 +7,8 @@ class CreatePost extends React.Component {
 
 		this.state = {
 			title: '',
-			author: ''
+			author: '',
+			content: ''
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -22,14 +23,15 @@ class CreatePost extends React.Component {
 	//---------------------------------------------------------------
 
 	createNewPost = _ => {
-		fetch(`http://localhost:8000/posts/add?title=${this.state.title}&author=${this.state.author}`)
+		fetch(`http://localhost:8000/posts/add?title=${this.state.title}&author=${this.state.author}&content=${this.state.content}`)
 			.then(response => response.json())
 			.then(this.props.getAllPosts)
 			.catch(err => console.log(err))
 
 		this.setState({
 			title: '',
-			author: ''
+			author: '',
+			content: ''
 		})
 	}
 
@@ -54,6 +56,14 @@ class CreatePost extends React.Component {
 							onChange={this.handleChange.bind(this)}
 							name='author'
 							placeholder='Your name' />
+					</div>
+					<div id='content'>
+						<input
+							type='text'
+							value={this.state.content}
+							onChange={this.handleChange.bind(this)}
+							name='content'
+							placeholder='Write your post here' />
 					</div>
 				</div>
 				<button onClick={this.createNewPost}>save</button>

@@ -35,10 +35,10 @@ class App extends React.Component {
 	}
 //-------------------------------------------------------------------------------
 
-componentDidMount() {
-	this.getAllPosts();
-}
 
+	componentDidMount() {
+		this.getAllPosts();
+	}
 //--------------------------------------------------------------------------
 
 	updateId = (id) => {
@@ -71,7 +71,7 @@ componentDidMount() {
 							path='/post-list'
 							render={(props) => <PostList {...props} 
 								allPosts={allPosts} 
-								getAllPosts={this.getSinglePost}/>}
+								getAllPosts={this.getAllPosts}/>}
 						/>
 					</Switch>
 				</div>

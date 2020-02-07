@@ -13,6 +13,8 @@ class PostListItem extends React.Component {
 
 //-------------------------------------------------------
 
+
+
 	render() {
 		return(
 			<div className='PostListItem'>

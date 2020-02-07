@@ -16,12 +16,11 @@ class App extends React.Component {
 
 		this.state = {
 			allPosts: [],
-			id: null,
+			id: 3,
 			singlePost: []
 		};
 
 	this.getAllPosts = this.getAllPosts.bind(this);
-	this.getSinglePost = this.getSinglePost.bind(this);
 	this.updateId = this.updateId.bind(this);
 	}
 //-------------------------------------------------------------------------------
@@ -42,12 +41,7 @@ class App extends React.Component {
 	}
 //-------------------------------------------------------------------------------
 
-	getSinglePost = _ => {
-		fetch(`http://localhost:8000/posts/view-post?id=${this.state.id}`)
-			.then(response => response.json())
-			.then(response => this.setState({ singlePost: response.data }))
-			.catch(err => console.log(err))
-	}
+
 
 //--------------------------------------------------------------------------
 
@@ -70,12 +64,14 @@ class App extends React.Component {
 						<Route
 							path='/create-post'
 							render={(props) => <CreatePost {...props}
-							refresh={this.getAllPosts}/>
+								refresh={this.getAllPosts}/>
 							}
 						/>
 						<Route
-							path='view-post'
-							component={ViewPost} />
+							path='/view-post'
+							render={(props) => <ViewPost {...props} 
+								singlePost={this.state.singlePost} />} 
+						/>
 						<Route
 							path='/post-list'
 							render={(props) => <PostList {...props} 
@@ -91,6 +87,7 @@ class App extends React.Component {
 
 const Home = () => {
 	return <h1>Home</h1>
-}
+};
+
 
 export default App;

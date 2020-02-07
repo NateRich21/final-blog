@@ -18,24 +18,18 @@ class PostListItem extends React.Component {
 			<div className='PostListItem'>
 				<div className='PostListItem-info'>
 					<Link to={{
-						pathname: `/view-post`,
+						pathname: `view-post`,
 						state: {
-							postId: this.props.post.id
+							id: this.props.post.id
 						}
 					}}>
-						<li>{this.props.post.title}</li>
+						<h1>{this.props.post.title}</h1>
 					</Link>
 					<p>
 						{this.props.post.author} |
 						{this.props.post.id}
 					</p>
 				</div>
-
-				<Route
-					path='/view-post'
-					render={(props) => <ViewPost {...props} 
-					id={this.props.post.id} />}
-				/>
 			</div>
 		)
 	}

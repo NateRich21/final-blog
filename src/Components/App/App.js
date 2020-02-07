@@ -16,10 +16,13 @@ class App extends React.Component {
 
 		this.state = {
 			allPosts: [],
-			id: null
+			id: null,
+			singlePost: []
 		};
 
 	this.getAllPosts = this.getAllPosts.bind(this);
+	this.getSinglePost = this.getSinglePost.bind(this);
+	this.updateId = this.updateId.bind(this);
 	}
 //-------------------------------------------------------------------------------
 
@@ -29,7 +32,7 @@ class App extends React.Component {
 //-------------------------------------------------------------------------------
 
 
-// RETREIVES TEST_TABLE-DATA BY ACCESSING THE /POST SUBDIRECTORY OF THE URL \\
+// RETRIEVES TEST_TABLE-DATA BY ACCESSING THE /POST SUBDIRECTORY OF THE URL \\
 // NEED TO SPEND MORE TIME UNDERSTANDING THIS BLOCK \\
 	getAllPosts = _ => {
 		fetch('http://localhost:8000/posts')
@@ -37,9 +40,20 @@ class App extends React.Component {
 			.then(response => this.setState({ allPosts: response.data }))
 			.catch(err => console.error(err))
 	}
+//-------------------------------------------------------------------------------
 
+	getSinglePost = _ => {
+		fetch(`http://localhost:8000/posts/view-post?id=${this.state.id}`)
+			.then(response => response.json())
+			.then(response => this.setState({ singlePost: response.data }))
+			.catch(err => console.log(err))
+	}
 
+//--------------------------------------------------------------------------
 
+	updateId = (id) => {
+		this.setState({ id: id })
+	}
 
 	render() {
 		const { allPosts } = this.state;
@@ -54,19 +68,19 @@ class App extends React.Component {
 							component={Home}
 						/>
 						<Route
-							path='/view-post'
-							exact
-							component={ViewPost}
-						/>
-						<Route
 							path='/create-post'
-							render={
-								(props) => <CreatePost {...props}		   refresh={this.getAllPosts}/>
+							render={(props) => <CreatePost {...props}
+							refresh={this.getAllPosts}/>
 							}
 						/>
 						<Route
+							path='view-post'
+							component={ViewPost} />
+						<Route
 							path='/post-list'
-							render={(props) => <PostList {...props} allPosts={allPosts}/>}
+							render={(props) => <PostList {...props} 
+								allPosts={allPosts} 
+								getSinglePost={this.getSinglePost}/>}
 						/>
 					</Switch>
 				</div>

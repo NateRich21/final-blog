@@ -28,6 +28,8 @@ class CreatePost extends React.Component {
 			.then(this.props.getAllPosts)
 			.catch(err => console.log(err))
 
+		this.props.refreshPostList();
+
 		this.setState({
 			title: '',
 			author: '',

@@ -64,13 +64,12 @@ class App extends React.Component {
 						<Route
 							path='/create-post'
 							render={(props) => <CreatePost {...props}
-								refresh={this.getAllPosts}/>
+								refreshPostList={this.getAllPosts}/>
 							}
 						/>
 						<Route
 							path='/view-post'
-							render={(props) => <ViewPost {...props} 
-								singlePost={this.state.singlePost} />} 
+							render={(props) => <ViewPost {...props}  />} 
 						/>
 						<Route
 							path='/post-list'

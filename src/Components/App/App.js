@@ -20,15 +20,9 @@ class App extends React.Component {
 			singlePost: []
 		};
 
-	this.getAllPosts = this.getAllPosts.bind(this);
 	this.updateId = this.updateId.bind(this);
+	this.getAllPosts = this.getAllPosts.bind(this);
 	}
-//-------------------------------------------------------------------------------
-
-	componentDidMount() {
-		this.getAllPosts();
-	}
-//-------------------------------------------------------------------------------
 
 
 // RETRIEVES TEST_TABLE-DATA BY ACCESSING THE /POST SUBDIRECTORY OF THE URL \\
@@ -41,7 +35,9 @@ class App extends React.Component {
 	}
 //-------------------------------------------------------------------------------
 
-
+componentDidMount() {
+	this.getAllPosts();
+}
 
 //--------------------------------------------------------------------------
 
@@ -75,7 +71,7 @@ class App extends React.Component {
 							path='/post-list'
 							render={(props) => <PostList {...props} 
 								allPosts={allPosts} 
-								getSinglePost={this.getSinglePost}/>}
+								getAllPosts={this.getSinglePost}/>}
 						/>
 					</Switch>
 				</div>

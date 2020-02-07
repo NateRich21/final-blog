@@ -13,6 +13,10 @@ class PostList extends React.Component {
 		console.log(props);
 	}
 
+	componentDidMount() {
+		this.getAllPosts();
+	}
+
 	render() {
 		return (
 			<div className='PostListPage'>
